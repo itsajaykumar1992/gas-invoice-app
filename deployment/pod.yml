@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invoice-backend
+spec:
+  replicas: 10  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: invoice-backend
+  template:
+    metadata:
+      labels:
+        app: invoice-backend
+    spec:
+      containers:
+        - name: invoice-backend
+          image: tejam7/invoice_backend:1.0.1  # Replace with your Spring Boot image
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invoice-backend-service
+spec:
+  selector:
+    app: invoice-backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP  # Expose the service internally within the cluster
