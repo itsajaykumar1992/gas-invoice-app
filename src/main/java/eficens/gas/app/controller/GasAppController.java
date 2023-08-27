@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/gas")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GasAppController {
 
     @Autowired
